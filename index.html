@@ -2,32 +2,38 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Country Quiz</title>
+    <title>Quiz App</title>
+
+
+
   </head>
   <body>
 
-    <!-- Intro View -->
+<!-- Intro View -->
+  <header id="js-intro-view">
     <h1>Country Quiz</h1>
     <p>Let's test your knowledge on country's capitals!</p>
-    <button type="button" name="button">Start Quiz!</button>
+    <button type="button" name="button" id="js-start-quiz">Start Quiz!</button>
+  </header>
 
-<!-- Question View -->
+  <main id="js-main-view">
+    <!-- Question View -->
     <h2>What is the capital of the US?</h2>
-    <form action="/answers" method="POST">
+    <form action="/answerspage" method="POST">
       <fieldset>
-        <input type="radio" name="answer" value="sacremento" id="answer-1">
+        <input type="radio" name="answer" value="Sacremento">
         <label for="answer-1">Sacremento</label>
 
-        <input type="radio" name="answer" value="washington-dc" id="answer-2">
-        <label for="answer-2">Washington D.C.</label>
+        <input type="radio" name="answer" value="Washington DC">
+        <label for="answer-2">Washington DC</label>
 
-        <input type="radio" name="answer" value="phoenix" id="answer-3">
-        <label for="answer-3">Phoenix</label>
+        <input type="radio" name="answer" value="phoenix">
+        <label for="Phoenix">Phoenix</label>
 
-        <input type="radio" name="answer" value="las-vegas" id="answer-4">
-        <label for="answer-4">Las Vegas</label>
+        <input type="radio" name="answer" value="las-vegas">
+        <label for="Las Vegs">Las Vegas</label>
 
-        <button type="submit" name="submit">Submit</button>
+        <button type="button" name="submit" id="submit-answer">Submit</button>
       </fieldset>
 
     </form>
@@ -41,7 +47,17 @@
     <p>The correct answer is </p>
     <button type='submit' name='next-question'>Next question!</button>
 
+  </main>
 
+  <section id="js-review" hidden>
+    <h2>You answered 5 of 5 correct</h2>
+  </section>
 
   </body>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+  </script>
+
+  <script src="script.js"></script>
+
 </html>
