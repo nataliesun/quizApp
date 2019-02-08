@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Country Quiz</title>
+  </head>
+  <body>
+
+    <!-- Intro View -->
+    <h1>Country Quiz</h1>
+    <p>Let's test your knowledge on country's capitals!</p>
+    <button type="button" name="button">Start Quiz!</button>
+
+<!-- Question View -->
+    <h2>What is the capital of the US?</h2>
+    <form action="/answers" method="POST">
+      <fieldset>
+        <input type="radio" name="answer" value="sacremento" id="answer-1">
+        <label for="answer-1">Sacremento</label>
+
+        <input type="radio" name="answer" value="washington-dc" id="answer-2">
+        <label for="answer-2">Washington D.C.</label>
+
+        <input type="radio" name="answer" value="phoenix" id="answer-3">
+        <label for="answer-3">Phoenix</label>
+
+        <input type="radio" name="answer" value="las-vegas" id="answer-4">
+        <label for="answer-4">Las Vegas</label>
+
+        <button type="submit" name="submit">Submit</button>
+      </fieldset>
+
+    </form>
+
+    <!-- Correct View -->
+  </body>
+</html>
