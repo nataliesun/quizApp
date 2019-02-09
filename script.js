@@ -9,21 +9,41 @@ const QUESTIONS = [
     question: `What does 오랜만이에요 [o-raen-ma-ni-e-yo] mean?`,
     answers: [`A. Thank you very much.`, `B. It will take a long time.`, `C. Long time no see.`, `D. Good-bye.`],
     correctAnswer: 'C. Long time no see.'
+  },
+  {
+    question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
+    answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
+    correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
+  },
+  {
+    question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
+    answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
+    correctAnswer: 'A. See you tomorrow.'
+  },
+  {
+    question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
+    answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
+    correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
   }
 ];
-
+//Current question index
+let i = 0;
 // Create your initial store
 const STORE = {
     // Current question
-    currentQuestion: QUESTIONS[0].question,
+    currentQuestion: QUESTIONS[i].question,
     //Current question's answers
-    currentAnswerChoices: QUESTIONS[0].answers,
+    currentAnswerChoices: QUESTIONS[i].answers,
+    //Current question's answers
+    currentCorrectAnswer: QUESTIONS[i].correctAnswer,
+    //correct choice?
+    wasCorrect: '',
     // User's answer choice(s)
-    usersAnswerChoice: null,
+    usersAnswerChoices: [],
     // Current view
     currentView: 'js-intro-view',
     // Score? Anything else?
-    score: 0
+    score: [0, 0]
 };
 
 // Template generators
@@ -42,49 +62,139 @@ function generateAnswerListHtml(answers) {
       <input type="radio" name="answer" value='${answers[3]}' id="answer-4">
       <label for="answer-4">${answers[3]}</label>
 
-      <button type="submit" name="submit">Submit</button>
+      <button type='button' name="submit" id="js-submit-answer">Submit</button>
     </fieldset>
   </form>`;
   return answerListHtml;
+}
+
+function generateCounterHtml() {
+  const counterHtml = `<div>Question ${i+1} of ${QUESTIONS.length}</div>
+  <div>Correct ${STORE.score[0]} | Incorrect ${STORE.score[1]}</div>`;
+  return counterHtml;
 }
 
 function generateQuestionHtml() {
   return `<h2>${STORE.currentQuestion}</h2>`
 }
 
+function generateFeedbackHtml(isCorrect, answer = STORE.currentCorrectAnswer) {
+  const correctHtml = `<h2>You are right!</h2>`;
+
+  const wrongHtml = `<h2>You are wrong!</h2>
+  <p>The correct answer is: ${answer}</p>`;
+
+  return isCorrect ? correctHtml : wrongHtml;
+}
+
+function generateFinalPageHtml() {
+  const finalScore = STORE.score;
+  let feedback = ''
+  const percentage = Math.round(finalScore[0]/QUESTIONS.length*100);
+  if (percentage >= 70) {
+    feedback = `<h2>Good job! You passed.</h2>`;
+  } else {
+    feedback = `<h2>Try again!</h2>`
+  }
+  return feedback + `<p>You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
+  <button type='button' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>`;
+}
+
+
 const MAIN_VIEW_EL = $('#js-main-view');
 // Rendering functions
 function renderQuestion() {
   const html = generateQuestionHtml() + generateAnswerListHtml(STORE.currentAnswerChoices);
-    MAIN_VIEW_EL.html(html);
+  MAIN_VIEW_EL.html(html);
+}
+
+function renderFeedback(wasCorrect) {
+  let html = '';
+  if (wasCorrect) {
+    html = generateFeedbackHtml(true);
+  } else {
+    html = generateFeedbackHtml(false);
+  }
+  MAIN_VIEW_EL.html(html);
+}
+
+
+function renderFinalPage() {
+  const html = generateFinalPageHtml();
+  MAIN_VIEW_EL.html(html);
+  HEADER_VIEW_EL.html('');
+}
+
+
+const HEADER_VIEW_EL = $('#js-counters');
+
+function renderCounters() {
+  const html = generateCounterHtml();
+  HEADER_VIEW_EL.html(html);
 }
 
 // Event handlers
 function handleAnswerSubmitted() {
-  $('#js-main-view').on('click', '#submit-answer', event => {
-    event.preventDefault();
+  $('#js-main-view').on('click', '#js-submit-answer', () => {
+
     // Retrieve answer identifier of user-checked radio button
-    const userAnswer = $("input:checked").val();
-    console.log(userAnswer);
+    let userAnswer = $("input:checked").val();
     // Perform check: User answer === Correct answer?
+    let correctAnswer = STORE.currentCorrectAnswer;
+
+    console.log(correctAnswer);
+    if (userAnswer === correctAnswer) {
+      ++STORE.score[0];
+      renderFeedback(true);
+    } else {
+      ++STORE.score[1];
+      renderFeedback(false);
+    }
+    //Update counters
+    renderCounters();
     // Update STORE and render appropriate section
+    ++i;
+    i < QUESTIONS.length ? (updateStore(), setTimeout(renderQuestion, 1000)) : (updateView('review'), renderFinalPage());
   });
 }
 
 function handleStartQuiz() {
   $('#js-start-quiz').on('click', () => {
+    //update view
+    updateView('question');
     renderQuestion();
-
-  //update view
-    STORE.currentView = 'js-main-view';
+    renderCounters();
   });
-}
+};
 
+function handleRestartQuiz() {
+  $('#js-main-view').on('click', '#js-restart-button',  () => {
+
+    i = 0;
+    updateView('main');
+    renderQuestion();
+  });
+};
+
+// Update Functions
 function updateStore() {
+  STORE.currentQuestion = QUESTIONS[i].question;
+  //Current question's answers
+  STORE.currentAnswerChoices= QUESTIONS[i].answers;
+  //Current question's answers
+  STORE.currentCorrectAnswer= QUESTIONS[i].correctAnswer;
+};
 
-}
+function updateView(view) {
+  if (view === 'question') {
+      STORE.currentView = 'js-question-view';
+  } else if (view === 'final') {
+      STORE.currentView = 'js-final-view';
+  }
+};
 
 $(function(){
     handleStartQuiz();
+    handleRestartQuiz();
     handleAnswerSubmitted();
 });

@@ -8,34 +8,37 @@
 
   </head>
   <body>
+<header id="js-counters">
 
+</header>
+<main id="js-main-view">
 <!-- Intro View -->
-  <header id="js-intro-view">
-    <h1>Country Quiz</h1>
-    <p>Let's test your knowledge on country's capitals!</p>
+  <section id="js-intro-view">
+    <h1>Korean Quiz</h1>
+    <p>Let's test your knowledge on basic Korean vocabulary!</p>
     <button type="button" name="button" id="js-start-quiz">Start Quiz!</button>
-  </header>
+  </section>
 
-  <main id="js-main-view">
+  <section id="js-question-view" hidden>
     <!-- Question View -->
-    <h2>What is the capital of the US?</h2>
-    <form action="/answerspage" method="POST">
+
+    <h2>Sample question</h2>
+    <form action="/answers" method="POST">
       <fieldset>
-        <input type="radio" name="answer" value="Sacremento">
-        <label for="answer-1">Sacremento</label>
+        <input type="radio" name="answer" value='${answers[0]}' id="answer-1">
+        <label for="answer-1">${answers[0]}</label>
 
-        <input type="radio" name="answer" value="Washington DC">
-        <label for="answer-2">Washington DC</label>
+        <input type="radio" name="answer" value='${answers[1]}' id="answer-2">
+        <label for="answer-2">${answers[1]}</label>
 
-        <input type="radio" name="answer" value="phoenix">
-        <label for="Phoenix">Phoenix</label>
+        <input type="radio" name="answer" value='${answers[2]}' id="answer-3">
+        <label for="answer-3">${answers[2]}</label>
 
-        <input type="radio" name="answer" value="las-vegas">
-        <label for="Las Vegs">Las Vegas</label>
+        <input type="radio" name="answer" value='${answers[3]}' id="answer-4">
+        <label for="answer-4">${answers[3]}</label>
 
-        <button type="button" name="submit" id="submit-answer">Submit</button>
+        <button type='button' name="submit" id="js-submit-answer">Submit</button>
       </fieldset>
-
     </form>
 
     <!-- Feedback View - if right -->
@@ -47,12 +50,14 @@
     <p>The correct answer is </p>
     <button type='submit' name='next-question'>Next question!</button>
 
-  </main>
 
-  <section id="js-review" hidden>
+
+
+  <section id="js-final-view" hidden>
     <h2>You answered 5 of 5 correct</h2>
+    <button type='button' name='restart-quiz' id="js-restart-button">Restart Quiz!</button>
   </section>
-
+  </main>
   </body>
 
   <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
