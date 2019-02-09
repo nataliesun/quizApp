@@ -50,27 +50,38 @@ const STORE = {
 function generateAnswerListHtml(answers) {
   const answerListHtml = `<form action="/answers" method="POST">
     <fieldset>
-      <input type="radio" name="answer" value='${answers[0]}' id="answer-1">
-      <label for="answer-1">${answers[0]}</label>
+      <div class="row">
+        <div class="box col-6">
+          <input type="radio" name="answer" value='${answers[0]}' id="answer-1" required>
+          <label for="answer-1">${answers[0]}</label>
+        </div>
 
-      <input type="radio" name="answer" value='${answers[1]}' id="answer-2">
-      <label for="answer-2">${answers[1]}</label>
+        <div class="box col-6">
+          <input type="radio" name="answer" value='${answers[1]}' id="answer-2" required>
+          <label for="answer-2">${answers[1]}</label>
+        </div>
+      </div>
 
-      <input type="radio" name="answer" value='${answers[2]}' id="answer-3">
-      <label for="answer-3">${answers[2]}</label>
+      <div class="row">
+        <div class="box col-6">
+          <input type="radio" name="answer" value='${answers[2]}' id="answer-3" required>
+          <label for="answer-3">${answers[2]}</label>
+        </div>
 
-      <input type="radio" name="answer" value='${answers[3]}' id="answer-4">
-      <label for="answer-4">${answers[3]}</label>
-
-      <button type='button' name="submit" id="js-submit-answer">Submit</button>
+        <div class="box col-6">
+          <input type="radio" name="answer" value='${answers[3]}' id="answer-4" required>
+          <label for="answer-4">${answers[3]}</label>
+        </div>
+      </div>
     </fieldset>
+    <button class="button2" type='submit' name="submit" id="js-submit-answer">Submit</button>
   </form>`;
   return answerListHtml;
 }
 
 function generateCounterHtml() {
-  const counterHtml = `<div>Question ${i+1} of ${QUESTIONS.length}</div>
-  <div>Correct ${STORE.score[0]} | Incorrect ${STORE.score[1]}</div>`;
+  const counterHtml = `<div class=''>Question ${i+1} of ${QUESTIONS.length}</div>
+  <div class=''>Correct ${STORE.score[0]} - Incorrect ${STORE.score[1]}</div>`;
   return counterHtml;
 }
 
@@ -79,9 +90,11 @@ function generateQuestionHtml() {
 }
 
 function generateFeedbackHtml(isCorrect, answer = STORE.currentCorrectAnswer) {
-  const correctHtml = `<h2>You are right!</h2>`;
+  const correctHtml = `<h2>You are right!</h2>
+  <div class='loading'></div>`;
 
-  const wrongHtml = `<h2>You are wrong!</h2>
+  const wrongHtml = `<h2>Incorrect!</h2>
+  <div class='loading'></div>
   <p>The correct answer is: ${answer}</p>`;
 
   return isCorrect ? correctHtml : wrongHtml;
@@ -97,7 +110,7 @@ function generateFinalPageHtml() {
     feedback = `<h2>Try again!</h2>`
   }
   return feedback + `<p>You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
-  <button type='button' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>`;
+  <button type='button' class='button2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>`;
 }
 
 
@@ -135,8 +148,8 @@ function renderCounters() {
 
 // Event handlers
 function handleAnswerSubmitted() {
-  $('#js-main-view').on('click', '#js-submit-answer', () => {
-
+  $('#js-main-view').submit('#js-submit-answer', event => {
+    event.preventDefault();
     // Retrieve answer identifier of user-checked radio button
     let userAnswer = $("input:checked").val();
     // Perform check: User answer === Correct answer?
@@ -154,7 +167,7 @@ function handleAnswerSubmitted() {
     renderCounters();
     // Update STORE and render appropriate section
     ++i;
-    i < QUESTIONS.length ? (updateStore(), setTimeout(renderQuestion, 1000)) : (updateView('review'), renderFinalPage());
+    i < QUESTIONS.length ? (updateStore(), setTimeout(renderQuestion, 3000)) : (updateView('review'), renderFinalPage());
   });
 }
 
@@ -171,6 +184,8 @@ function handleRestartQuiz() {
   $('#js-main-view').on('click', '#js-restart-button',  () => {
 
     i = 0;
+    updateStore();
+    STORE.score = [0, 0];
     updateView('main');
     renderQuestion();
   });
