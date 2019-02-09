@@ -1,8 +1,26 @@
 * {
   font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0
 }
 
-.intro {
+.margin-top40 {
+  margin-top: 40px;
+}
+
+.margin-left20 {
+  margin-left: 20px;
+}
+
+.margin-bottom20 {
+  margin-bottom: 20px;
+}
+
+.margin-bottom10 {
+  margin-bottom: 10px;
+}
+
+.center {
   text-align: center;
 }
 
@@ -13,13 +31,26 @@ fieldset {
 .box {
   border: 1px solid black;
   border-radius: 6px;
+  margin-bottom: 10px;
+  line-height: 2.5em;
 }
 
 button {
   display: block;
   margin: 0 auto;
+  padding: 15px;
+  border-radius: 6px;
 }
 
+button:hover {
+  color: white;
+  background-color: black;
+}
+
+.box:hover {
+  color: white;
+  background-color: black;
+}
 .button2 {
   margin-top: 10px;
 }
