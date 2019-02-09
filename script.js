@@ -10,21 +10,21 @@ const QUESTIONS = [
     answers: [`A. Thank you very much.`, `B. It will take a long time.`, `C. Long time no see.`, `D. Good-bye.`],
     correctAnswer: 'C. Long time no see.'
   },
-  {
-    question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
-    answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
-    correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
-  },
-  {
-    question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
-    answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
-    correctAnswer: 'A. See you tomorrow.'
-  },
-  {
-    question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
-    answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
-    correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
-  }
+  // {
+  //   question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
+  //   answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
+  //   correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
+  // },
+  // {
+  //   question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
+  //   answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
+  //   correctAnswer: 'A. See you tomorrow.'
+  // },
+  // {
+  //   question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
+  //   answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
+  //   correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
+  // }
 ];
 //Current question index
 let i = 0;
@@ -80,13 +80,19 @@ function generateAnswerListHtml(answers) {
 }
 
 function generateCounterHtml() {
-  const counterHtml = `<div class=''>Question ${i+1} of ${QUESTIONS.length}</div>
-  <div class=''>Correct ${STORE.score[0]} - Incorrect ${STORE.score[1]}</div>`;
+  const counterHtml = `
+    <div class='margin-top40 margin-left20 margin-bottom20'>
+    <div class=''>Question ${i+1} of ${QUESTIONS.length}</div>
+    <div class=''>Correct ${STORE.score[0]} - Incorrect ${STORE.score[1]}</div>
+    </div>`;
   return counterHtml;
 }
 
 function generateQuestionHtml() {
-  return `<h2>${STORE.currentQuestion}</h2>`
+  return `
+  <div class="margin-left20 margin-bottom20">
+  <h2>${STORE.currentQuestion}</h2>
+  </div>`
 }
 
 function generateFeedbackHtml(isCorrect, answer = STORE.currentCorrectAnswer) {
@@ -105,12 +111,13 @@ function generateFinalPageHtml() {
   let feedback = ''
   const percentage = Math.round(finalScore[0]/QUESTIONS.length*100);
   if (percentage >= 70) {
-    feedback = `<h2>Good job! You passed.</h2>`;
+    feedback = `<h2 class="margin-bottom20">Good job! You passed.</h2>`;
   } else {
-    feedback = `<h2>Try again!</h2>`
+    feedback = `<h2 class="margin-bottom20">Try again!</h2>`
   }
-  return feedback + `<p>You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
-  <button type='button' class='button2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>`;
+  return `<div class='center margin-top40'>` + feedback + `<p class="margin-bottom10">You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
+  <button type='button' class='button2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>
+  </div>`;
 }
 
 
@@ -166,10 +173,24 @@ function handleAnswerSubmitted() {
     //Update counters
     renderCounters();
     // Update STORE and render appropriate section
-    ++i;
-    i < QUESTIONS.length ? (updateStore(), setTimeout(renderQuestion, 3000)) : (updateView('review'), renderFinalPage());
+    ++i; //question index
+    if (i < QUESTIONS.length) {
+      updateStore();
+      setTimeout(renderQuestion, 3000);
+    } else {
+      setTimeout(renderFinalPage, 3000);
+      updateView('review');
+    }
   });
-}
+};
+
+function handleBoxClick() {
+  //when user clicks box, make that radio checked
+  $('#js-main-view').on('click', '.box', event => {
+
+
+  });
+};
 
 function handleStartQuiz() {
   $('#js-start-quiz').on('click', () => {
@@ -187,6 +208,7 @@ function handleRestartQuiz() {
     updateStore();
     STORE.score = [0, 0];
     updateView('main');
+    renderCounters();
     renderQuestion();
   });
 };
@@ -212,4 +234,5 @@ $(function(){
     handleStartQuiz();
     handleRestartQuiz();
     handleAnswerSubmitted();
+    handleBoxClick();
 });
