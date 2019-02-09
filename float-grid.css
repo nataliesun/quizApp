@@ -67,7 +67,8 @@
   /* 6 columns */
   .col-6 {
     width: 49%;
-    margin: 0 .5%
+    margin-left: .5%;
+    margin-right: .5%
   }
 
   /* 12 columns */
