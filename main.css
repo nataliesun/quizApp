@@ -1,0 +1,55 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.intro {
+  text-align: center;
+}
+
+fieldset {
+  border: 0;
+}
+
+.box {
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+.button2 {
+  margin-top: 10px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+.loading {
+  width: 0;
+  height: 10px;
+  background-color: grey;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 3s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  from {width: 0;}
+  to {width: 100%;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  from {width: 0;}
+  to {width: 100%;}
+}
