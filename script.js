@@ -10,21 +10,21 @@ const QUESTIONS = [
     answers: [`A. Thank you very much.`, `B. It will take a long time.`, `C. Long time no see.`, `D. Good-bye.`],
     correctAnswer: 'C. Long time no see.'
   },
-  // {
-  //   question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
-  //   answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
-  //   correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
-  // },
-  // {
-  //   question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
-  //   answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
-  //   correctAnswer: 'A. See you tomorrow.'
-  // },
-  // {
-  //   question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
-  //   answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
-  //   correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
-  // }
+  {
+    question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
+    answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
+    correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
+  },
+  {
+    question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
+    answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
+    correctAnswer: 'A. See you tomorrow.'
+  },
+  {
+    question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
+    answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
+    correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
+  }
 ];
 //Current question index
 let i = 0;
