@@ -96,12 +96,12 @@ function generateQuestionHtml() {
 }
 
 function generateFeedbackHtml(isCorrect, answer = STORE.currentCorrectAnswer) {
-  const correctHtml = `<h2>You are right!</h2>
-  <div class='loading'></div>`;
+  const correctHtml = `<h2 class="margin-top40 margin-bottom20 margin-left20">You are right!</h2>
+  <div class='loading margin-bottom20'></div>`;
 
-  const wrongHtml = `<h2>Incorrect!</h2>
-  <div class='loading'></div>
-  <p>The correct answer is: ${answer}</p>`;
+  const wrongHtml = `<h2 class="margin-top40 margin-bottom20 margin-left20">Incorrect!</h2>
+  <div class='loading margin-bottom20'></div>
+  <p class="margin-left20">The correct answer is: ${answer}</p>`;
 
   return isCorrect ? correctHtml : wrongHtml;
 }
@@ -115,7 +115,7 @@ function generateFinalPageHtml() {
   } else {
     feedback = `<h2 class="margin-bottom20">Try again!</h2>`
   }
-  return `<div class='center margin-top40'>` + feedback + `<p class="margin-bottom10">You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
+  return `<div class='center margin-top80'>` + feedback + `<p class="margin-bottom10">You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
   <button type='button' class='button2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>
   </div>`;
 }
@@ -223,7 +223,7 @@ function updateStore() {
   STORE.currentQuestion = QUESTIONS[i].question;
   //Current question's answers
   STORE.currentAnswerChoices= QUESTIONS[i].answers;
-  //Current question's answers
+  //Current question's answer
   STORE.currentCorrectAnswer= QUESTIONS[i].correctAnswer;
 };
 

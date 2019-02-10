@@ -8,6 +8,10 @@
   margin-top: 40px;
 }
 
+.margin-top80 {
+  margin-top: 80px;
+}
+
 .margin-left20 {
   margin-left: 20px;
 }
@@ -22,6 +26,16 @@
 
 .center {
   text-align: center;
+}
+
+.top-right {
+  position: absolute;
+  top: 1.04%;
+  right: 1.04%;
+}
+
+nav img {
+  width: 70px
 }
 
 fieldset {
