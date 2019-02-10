@@ -49,6 +49,13 @@ fieldset {
   line-height: 2.5em;
 }
 
+.box:hover, label:hover, input:hover, button:hover {
+  cursor: pointer;
+}
+
+
+
+
 button {
   display: block;
   margin: 0 auto;

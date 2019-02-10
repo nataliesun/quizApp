@@ -48,7 +48,7 @@ const STORE = {
 
 // Template generators
 function generateAnswerListHtml(answers) {
-  const answerListHtml = `<form action="/answers" method="POST">
+  const answerListHtml = `
     <fieldset>
       <div class="row">
         <div class="box col-6">
@@ -90,8 +90,11 @@ function generateCounterHtml() {
 
 function generateQuestionHtml() {
   return `
+  <form action="/answers" method="POST">
   <div class="margin-left20 margin-bottom20">
+  <legend>
   <h2>${STORE.currentQuestion}</h2>
+  </legend>
   </div>`
 }
 
