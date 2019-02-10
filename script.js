@@ -187,8 +187,13 @@ function handleAnswerSubmitted() {
 function handleBoxClick() {
   //when user clicks box, make that radio checked
   $('#js-main-view').on('click', '.box', event => {
-
-
+    let target = $(event.target);
+    let child = target.children();
+    if (child.is('input')) {
+      child.attr('checked', true);
+    }
+    console.log(child);
+//doesn't work after clicking on actual label and then div
   });
 };
 
