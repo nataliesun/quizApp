@@ -1,7 +1,39 @@
 * {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
-  padding: 0
+  padding: 0;
+  color: white;
+}
+
+html {
+  background-image: url("assets/seoul-background.jpg");
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.intro-box {
+  background-color: rgba(1, 152,200, .9);
+  width: 70%;
+  transform: translate(22%, 50%);
+  padding: 30px 0 90px 0;
+}
+
+.final-box {
+  background-color: rgba(1, 152,200, .9);
+
+  width: 70%;
+  transform: translate(22%, 50%);
+  padding: 30px 0 60px 0;
+}
+
+form {
+  background-color: rgba(1, 152,200, .9);
+  width: 80%;
+  transform: translate(12%, 30%);
+  padding: 80px 40px 60px 40px;
 }
 
 .margin-top40 {
@@ -30,12 +62,12 @@
 
 .top-right {
   position: absolute;
-  top: 1.04%;
-  right: 1.04%;
+  top: 3.04%;
+  right: 3.04%;
 }
 
 nav img {
-  width: 70px
+  width: 40px;
 }
 
 fieldset {
@@ -43,10 +75,14 @@ fieldset {
 }
 
 .box {
-  border: 1px solid black;
+  border: 1px solid #0587C0;
   border-radius: 6px;
   margin-bottom: 10px;
   line-height: 2.5em;
+}
+
+label {
+  padding-left: 5px;
 }
 
 .box:hover, label:hover, input:hover, button:hover {
@@ -54,23 +90,16 @@ fieldset {
 }
 
 
+.middle{
 
-
-button {
-  display: block;
-  margin: 0 auto;
-  padding: 15px;
-  border-radius: 6px;
+  text-align: center;
 }
 
-button:hover {
-  color: white;
-  background-color: black;
-}
+
 
 .box:hover {
-  color: white;
-  background-color: black;
+
+  background-color: #0587C0;
 }
 .button2 {
   margin-top: 10px;
@@ -87,7 +116,7 @@ button:hover {
 .loading {
   width: 0;
   height: 10px;
-  background-color: grey;
+  background-color: #F0BB51;
   -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
   animation-name: example;
@@ -104,4 +133,78 @@ button:hover {
 @keyframes example {
   from {width: 0;}
   to {width: 100%;}
+}
+
+
+
+/* BUTTONS */
+
+.btn{
+  background: none;
+  border: 2px solid #F0BB51;
+  font-family: "montserrat",sans-serif;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  min-width: 200px;
+  margin: 10px;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+}
+.btn:hover{
+  color: #fff;
+}
+.btn::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #F0BB51;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+}
+.btn1::before{
+  transform: scaleX(0);
+}
+.btn2::before{
+  transform: scaleY(0);
+}
+.btn1:hover::before{
+  transform: scaleX(1);
+}
+.btn2:hover::before{
+  transform: scaleY(1);
+}
+
+/* RADIOS */
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: rgba(1, 152,200, 1);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #F0BB51
+}
+
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #F0BB51;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #F0BB51;
 }

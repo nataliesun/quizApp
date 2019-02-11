@@ -5,26 +5,26 @@ const QUESTIONS = [
     answers: ['A. I like you.' , 'B. Thank you.', 'C. Nice to meet you.', 'D. You are very kind.'],
     correctAnswer: 'B. Thank you.'
   },
-  {
-    question: `What does 오랜만이에요 [o-raen-ma-ni-e-yo] mean?`,
-    answers: [`A. Thank you very much.`, `B. It will take a long time.`, `C. Long time no see.`, `D. Good-bye.`],
-    correctAnswer: 'C. Long time no see.'
-  },
-  {
-    question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
-    answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
-    correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
-  },
-  {
-    question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
-    answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
-    correctAnswer: 'A. See you tomorrow.'
-  },
-  {
-    question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
-    answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
-    correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
-  }
+  // {
+  //   question: `What does 오랜만이에요 [o-raen-ma-ni-e-yo] mean?`,
+  //   answers: [`A. Thank you very much.`, `B. It will take a long time.`, `C. Long time no see.`, `D. Good-bye.`],
+  //   correctAnswer: 'C. Long time no see.'
+  // },
+  // {
+  //   question: `Which of the following has the most similar meaning to 감사합니다 [gam-sa-ham-ni-da]?`,
+  //   answers: [`A. 그렇습니다. [geu-reo-sseum-ni-da]`, `B. 안녕히 계세요. [an-nyeong-hi gye-se-yo]`, `C. 저도 모르겠어요. [jeo-do mo-reu-ge-sseo-yo]`, `D. 고맙습니다. [go-map-seum-ni-da]`],
+  //   correctAnswer: `D. 고맙습니다. [go-map-seum-ni-da]`
+  // },
+  // {
+  //   question: `What does 내일 봐요 [nae-il bwa-yo] mean?`,
+  //   answers: [`A. See you tomorrow.`, `B. See you later.`, `C. See you again`, `D. Take care.`],
+  //   correctAnswer: 'A. See you tomorrow.'
+  // },
+  // {
+  //   question: `Which of these expressions can you NOT use when you meet someone for the first time?`,
+  //   answers: [`A. 안녕하세요. [an-nyeong-ha-se-yo]`, `B. 반갑습니다. [ban-gap-seum-ni-da]`, `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`, `D. 처음 뵙겠습니다. [cheo-eum boep-ge-sseum-ni-da]`],
+  //   correctAnswer: `C. 오랜만이에요. [o-raen-ma-ni-e-yo]`
+  // }
 ];
 //Current question index
 let i = 0;
@@ -74,7 +74,9 @@ function generateAnswerListHtml(answers) {
         </div>
       </div>
     </fieldset>
-    <button class="button2" type='submit' name="submit" id="js-submit-answer">Submit</button>
+    <div class="middle">
+      <button class="btn btn1" type='submit' name="submit" id="js-submit-answer">Submit</button>
+    </div>
   </form>`;
   return answerListHtml;
 }
@@ -91,7 +93,7 @@ function generateCounterHtml() {
 function generateQuestionHtml() {
   return `
   <form action="/answers" method="POST">
-  <div class="margin-left20 margin-bottom20">
+  <div class="margin-left20 margin-bottom20 center">
   <legend>
   <h2>${STORE.currentQuestion}</h2>
   </legend>
@@ -99,12 +101,20 @@ function generateQuestionHtml() {
 }
 
 function generateFeedbackHtml(isCorrect, answer = STORE.currentCorrectAnswer) {
-  const correctHtml = `<h2 class="margin-top40 margin-bottom20 margin-left20">You are right!</h2>
-  <div class='loading margin-bottom20'></div>`;
+  const correctHtml = `
+  <div class="intro-box center">
+    <div class='loading margin-bottom20'></div>
+    <h2 class="margin-top40 margin-bottom20 margin-left20">You are right!</h2>
 
-  const wrongHtml = `<h2 class="margin-top40 margin-bottom20 margin-left20">Incorrect!</h2>
-  <div class='loading margin-bottom20'></div>
-  <p class="margin-left20">The correct answer is: ${answer}</p>`;
+  </div>`;
+
+  const wrongHtml = `
+  <div class="intro-box center">
+    <div class='loading margin-bottom20'></div>
+    <h2 class="margin-top40 margin-bottom20 margin-left20">Incorrect!</h2>
+
+    <p class="margin-left20">The correct answer is: ${answer}</p>
+  </div>`;
 
   return isCorrect ? correctHtml : wrongHtml;
 }
@@ -114,12 +124,12 @@ function generateFinalPageHtml() {
   let feedback = ''
   const percentage = Math.round(finalScore[0]/QUESTIONS.length*100);
   if (percentage >= 70) {
-    feedback = `<h2 class="margin-bottom20">Good job! You passed.</h2>`;
+    feedback = `<h2 class="margin-bottom20 margin-top40">Good job! You passed.</h2>`;
   } else {
-    feedback = `<h2 class="margin-bottom20">Try again!</h2>`
+    feedback = `<h2 class="margin-bottom20 margin-top40">Try again!</h2>`
   }
-  return `<div class='center margin-top80'>` + feedback + `<p class="margin-bottom10">You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
-  <button type='button' class='button2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>
+  return `<div class='center final-box'>` + feedback + `<p class="margin-bottom10">You answered ${finalScore[0]} correct and ${finalScore[1]} wrong. (${percentage}%)</p>
+  <button type='button' class='btn btn2' name='restart-quiz' id='js-restart-button'>Restart Quiz!</button>
   </div>`;
 }
 
