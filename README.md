@@ -1,29 +1,17 @@
 # Basic Korean Quiz App
 
-An app that quizzes the user on basic Korean grammar. Uses HTML, CSS, Javascript and JQuery.
+[Live App](https://natsun121.github.io/quizApp/)
 
-## Getting Started
+An app that quizzes the user on basic Korean grammar.
 
-Open the index.html file in browser, the user can start the quiz by pressing the button to start quiz. The user will be prompted through 5 questions and given feedback after every question.
+## Built with
 
-### Prerequisites
-
-Browser
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [JQuery](https://code.jquery.com/)  
-
-## Contributing
+- HTML
+- CSS
+- Javascript
+- [JQuery](https://code.jquery.com/) 
 
 ## Authors
 
 * **Natalie Sun** - *Initial work*
 
-## Acknowledgments
-
-* Thinkful
