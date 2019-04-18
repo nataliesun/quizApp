@@ -1,6 +1,6 @@
 # Basic Korean Quiz App
 
-[Live App](https://natsun121.github.io/quizApp/)
+[Live App](https://nataliesun.github.io/quizApp/)
 
 An app that quizzes the user on basic Korean grammar.
 
